@@ -2,7 +2,7 @@ applications:
   app:
     source:
       root: /
-    type: php:8.3
+    type: php:8.4
     build:
       flavor: composer
     web:
@@ -29,9 +29,9 @@ applications:
       deploy: |
         set -e
         cd web
-        drush -y cache-rebuild
-        drush -y updatedb
-        drush -y config-import
+        /vendor/bin/drush -y cache-rebuild
+        /vendor/bin/drush -y updatedb
+        /vendor/bin/drush -y config-import
 
 services:
   mariadb:
