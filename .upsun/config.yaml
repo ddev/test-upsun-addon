@@ -6,7 +6,7 @@ applications:
     web:
       locations:
         "/":
-          root: "."
+          root: "public"
           index:
             - "index.html"
             - "README.md"
