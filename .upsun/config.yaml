@@ -6,13 +6,12 @@ applications:
     web:
       locations:
         "/":
-          root: "/"
+          root: "."
           index:
             - "index.html"
             - "README.md"
           scripts: false
           allow: true
-    disk: 256
 
 routes:
   "https://{default}/": 
