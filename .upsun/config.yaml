@@ -5,8 +5,8 @@ applications:
     type: "nodejs:22"
     hooks:
       build: |
-        # Install pandoc using the Upsun script
-        curl -fsS https://raw.githubusercontent.com/upsun/snippets/main/src/install-pandoc.sh | bash
+        # Install pandoc using GitHub releases
+        curl -fsS https://raw.githubusercontent.com/upsun/snippets/main/src/install-github-asset.sh | bash /dev/stdin "jgm/pandoc" "3.5" "pandoc-3.5-linux-amd64.tar.gz"
         
         # Create public directory if it doesn't exist
         mkdir -p public
