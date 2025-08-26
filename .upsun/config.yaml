@@ -1,41 +1,39 @@
 applications:
-  drupal-composer:
+  app:
+    source:
+      root: /
     type: php:8.3
-    
-    relationships:
-      database:
-    
-    variables:
-      php:
-        memory_limit: 256M
-        max_execution_time: 300
-      env:
-        DRUPAL_ENVIRONMENT: production
-    
+    build:
+      flavor: composer
     web:
       locations:
-        '/':
-          root: 'web'
+        "/":
+          root: "web"
+          passthru: "/index.php"
           index:
             - index.php
-          passthru: '/index.php'
-          expires: 1h
-        '/sites/default/files':
-          root: 'web/sites/default/files'
-          expires: 1y
-    
+        "/sites/default/files":
+          root: "web/sites/default/files"
+          scripts: false
+          allow: true
+    mounts:
+      "/web/sites/default/files": "shared:files/files"
+      "/tmp": "shared:files/tmp"
+      "/private": "shared:files/private"
+    relationships:
+      database: "mariadb:mysql"
     hooks:
       build: |
+        set -e
         composer install --no-dev --optimize-autoloader
       deploy: |
-        drush updatedb -y
-        drush cache:rebuild
-    
-    mounts:
-      '/web/sites/default/files': 'shared:files/files'
-      '/private': 'shared:files/private'
+        set -e
+        cd web
+        drush -y cache-rebuild
+        drush -y updatedb
+        drush -y config-import
 
 services:
-  database:
+  mariadb:
     type: mariadb:10.11
-    disk: 2048
+    disk: 1024
