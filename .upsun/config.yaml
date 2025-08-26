@@ -1,0 +1,20 @@
+applications:
+  app:
+    source:
+      root: "/"
+    type: "nodejs:22"
+    web:
+      locations:
+        "/":
+          root: "/"
+          index:
+            - "index.html"
+            - "README.md"
+          scripts: false
+          allow: true
+    disk: 256
+
+routes:
+  "https://{default}/": 
+    type: upstream
+    upstream: "app:http"
