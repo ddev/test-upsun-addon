@@ -3,6 +3,16 @@ applications:
     source:
       root: "/"
     type: "nodejs:22"
+    hooks:
+      build: |
+        # Install pandoc using the Upsun script
+        curl -fsS https://raw.githubusercontent.com/upsun/snippets/main/src/install-pandoc.sh | bash
+        
+        # Create public directory if it doesn't exist
+        mkdir -p public
+        
+        # Convert README.md to HTML using pandoc
+        /app/.global/bin/pandoc README.md -o public/index.html --standalone --title "Upsun Add-on Test Project"
     web:
       locations:
         "/":
