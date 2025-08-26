@@ -9,7 +9,6 @@ applications:
           root: "public"
           index:
             - "index.html"
-            - "README.md"
           scripts: false
           allow: true
 
