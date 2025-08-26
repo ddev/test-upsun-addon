@@ -36,4 +36,8 @@ applications:
 services:
   mariadb:
     type: mariadb:10.11
-    disk: 1024
+
+routes:
+  "https://{default}/":
+    type: upstream
+    upstream: "app:http"
