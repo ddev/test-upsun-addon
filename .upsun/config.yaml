@@ -28,6 +28,10 @@ applications:
           root: "web/sites/default/files"
           scripts: false
           allow: true
+    variables:
+      env:
+        N_PREFIX: "/app/.global"
+
     mounts:
       "/web/sites/default/files": "shared:files/files"
       "/tmp": "shared:files/tmp"
