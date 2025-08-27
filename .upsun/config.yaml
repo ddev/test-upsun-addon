@@ -4,7 +4,7 @@ applications:
       root: /
     type: php:8.4
     build:
-      flavor: none
+      flavor: composer
     # Installs global dependencies as part of the build process. They're independent of your app's dependencies and
     # are available in the PATH during the build process and in the runtime environment. They're installed before
     # the build hook runs using a package manager for the language.
