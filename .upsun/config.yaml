@@ -1,5 +1,5 @@
 applications:
-  app:
+  drupal:
     source:
       root: /
     type: php:8.4
@@ -60,4 +60,4 @@ services:
 routes:
   "https://{default}/":
     type: upstream
-    upstream: "app:http"
+    upstream: "drupal:http"
