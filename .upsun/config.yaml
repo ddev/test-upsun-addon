@@ -21,13 +21,29 @@ applications:
       locations:
         "/":
           root: "web"
+          expires: 5m
           passthru: "/index.php"
-          index:
-            - index.php
-        "/sites/default/files":
-          root: "web/sites/default/files"
-          scripts: false
-          allow: true
+          allow: false
+          rules:
+            '\.(avif|webp|jpe?g|png|gif|svgz?|css|js|map|ico|bmp|eot|woff2?|otf|ttf)$':
+              allow: true
+            '^/robots\.txt$':
+              allow: true
+            '^/sitemap\.xml$':
+              allow: true
+            '^/sites/sites\.php$':
+              scripts: false
+            '^/sites/[^/]+/settings.*?\.php$':
+              scripts: false
+            '/sites/default/files':
+              allow: true
+              expires: 5m
+              passthru: '/index.php'
+              root: 'web/sites/default/files'
+              scripts: false
+              rules:
+                '^/sites/default/files/(css|js)':
+                  expires: 2w
     variables:
       env:
         N_PREFIX: "/app/.global"
@@ -42,8 +58,8 @@ applications:
       mariadb: "mariadb:mysql"
     hooks:
       build: |
-        set -eux
-
+        set -e
+        # fast.
       deploy: |
         set -e
         php ./drush/upsun_generate_drush_yml.php
