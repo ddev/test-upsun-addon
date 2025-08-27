@@ -39,7 +39,7 @@ applications:
       "/.drush": "shared:files/drush"
       "/drush-backups": "shared:files/drush-backups"
     relationships:
-      database: "mariadb:mysql"
+      mariadb: "mariadb:mysql"
     hooks:
       build: |
         set -eux
