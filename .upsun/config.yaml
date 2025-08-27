@@ -35,15 +35,15 @@ applications:
               scripts: false
             '^/sites/[^/]+/settings.*?\.php$':
               scripts: false
-            '/sites/default/files':
-              allow: true
-              expires: 5m
-              passthru: '/index.php'
-              root: 'web/sites/default/files'
-              scripts: false
-              rules:
-                '^/sites/default/files/(css|js)':
-                  expires: 2w
+        "/sites/default/files":
+          root: "web/sites/default/files"
+          allow: true
+          expires: 5m
+          passthru: "/index.php"
+          scripts: false
+          rules:
+            '^/sites/default/files/(css|js)':
+              expires: 2w
     variables:
       env:
         N_PREFIX: "/app/.global"
