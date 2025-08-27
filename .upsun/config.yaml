@@ -48,10 +48,10 @@ applications:
 
       deploy: |
         set -e
+        php ./drush/upsun_generate_drush_yml.php
         cd web
-        /vendor/bin/drush -y cache-rebuild
-        /vendor/bin/drush -y updatedb
-        /vendor/bin/drush -y config-import
+        bash $PLATFORM_APP_DIR/drush/upsun_deploy_drupal.sh
+
 
 services:
   mariadb:
