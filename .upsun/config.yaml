@@ -5,6 +5,18 @@ applications:
     type: php:8.4
     build:
       flavor: composer
+    # Installs global dependencies as part of the build process. They're independent of your app's dependencies and
+    # are available in the PATH during the build process and in the runtime environment. They're installed before
+    # the build hook runs using a package manager for the language.
+    # More information: https://docs.upsun.com/create-apps/app-reference/single-runtime-image.html#dependencies
+    dependencies:
+      nodejs:
+        n: "*"
+        npx: "*"
+        yarn: "^1.22.0"
+      php:
+        composer/composer: "^2"
+
     web:
       locations:
         "/":
@@ -24,8 +36,12 @@ applications:
       database: "mariadb:mysql"
     hooks:
       build: |
-        set -e
-        composer install --no-dev --optimize-autoloader
+        set -eux
+        composer --no-ansi --no-interaction install --no-progress --prefer-dist --optimize-autoloader --no-dev
+        n auto || n lts
+        hash -r
+        yarn
+
       deploy: |
         set -e
         cd web
