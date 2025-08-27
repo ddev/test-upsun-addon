@@ -149,4 +149,26 @@ mounts:
 ### Key Insight: Always Use Official Examples
 The official examples in `upsun/snippets` are the most reliable source for configuration patterns. The documentation sometimes lags behind, but the examples are tested and working.
 
-**Note**: Laravel documentation exists but lacks a corresponding example in snippets - this may require more experimentation or creating our own reference implementation.
+## Upsun Repository Patterns Discovered
+
+### Official Resource Types
+1. **`upsun/snippets`** - Production-ready config examples (Drupal 11, etc.)
+2. **`upsun/[framework]-scaffold`** - Composer plugins for automatic setup (Drupal only so far)
+3. **`upsun/demo-project-[framework]`** - Tutorial/learning projects (Symfony found)
+4. **`platformsh-templates/[framework]`** - Platform.sh templates (Laravel found)
+
+### Laravel Implementation Plan
+
+**Important Discovery**: `platformsh-templates/laravel` exists but uses **different configuration format** from Upsun (`.platform.app.yaml` vs `.upsun/config.yaml`). These templates are **not directly compatible**.
+
+**Approach**: Create Laravel implementation from scratch using:
+- **Upsun Laravel Guide**: https://docs.upsun.com/get-started/stacks/laravel.html
+- **Upsun Config Format**: Use `.upsun/config.yaml` syntax
+- **Official Snippets Pattern**: Follow same approach as successful Drupal 11 implementation
+
+**Next Steps**:
+1. Create simple Laravel project as starting point
+2. Build `.upsun/config.yaml` for Laravel (PHP 8.3+ runtime)
+3. Configure database relationships and environment variables
+4. Test deployment and document learnings
+5. Create `laravel` branch as reference implementation
