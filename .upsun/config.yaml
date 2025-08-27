@@ -41,10 +41,6 @@ applications:
     hooks:
       build: |
         set -eux
-        composer --no-ansi --no-interaction install --no-progress --prefer-dist --optimize-autoloader --no-dev
-        n auto || n lts
-        hash -r
-        yarn
 
       deploy: |
         set -e
