@@ -36,6 +36,8 @@ applications:
       "/web/sites/default/files": "shared:files/files"
       "/tmp": "shared:files/tmp"
       "/private": "shared:files/private"
+      "/.drush": "shared:files/drush"
+      "/drush-backups": "shared:files/drush-backups"
     relationships:
       database: "mariadb:mysql"
     hooks:
